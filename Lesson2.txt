@@ -1,0 +1,91 @@
+tatiana@tatiana-VirtualBox:~$ mysqldump example > sample.sql
+tatiana@tatiana-VirtualBox:~$ ls
+ sample.sql   Документы   Изображения   Общедоступные   Шаблоны
+ Видео        Загрузки    Музыка       'Рабочий стол'
+tatiana@tatiana-VirtualBox:~$ tail 5 sample.sql 
+tail: невозможно открыть '5' для чтения: Нет такого файла или каталога
+==> sample.sql <==
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2020-09-04 19:09:56
+tatiana@tatiana-VirtualBox:~$ tail -5 sample.sql 
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2020-09-04 19:09:56
+tatiana@tatiana-VirtualBox:~$ mysql sample < sample.sql 
+ERROR 1049 (42000): Unknown database 'sample'
+tatiana@tatiana-VirtualBox:~$ mysql 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 30
+Server version: 8.0.21-0ubuntu0.20.04.4 (Ubuntu)
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> CREATE DATABASE sample;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> exit
+Bye
+tatiana@tatiana-VirtualBox:~$ mysql sample < sample.sql 
+tatiana@tatiana-VirtualBox:~$ ls
+ sample.sql   Документы   Изображения   Общедоступные   Шаблоны
+ Видео        Загрузки    Музыка       'Рабочий стол'
+tatiana@tatiana-VirtualBox:~$ mysql 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 32
+Server version: 8.0.21-0ubuntu0.20.04.4 (Ubuntu)
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| example            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sample             |
+| sys                |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql> USE sample;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> USE sample
+Database changed
+mysql> SHOW TABLES;
++------------------+
+| Tables_in_sample |
++------------------+
+| users            |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> 
+
+
